@@ -1,0 +1,170 @@
+/* The voice-input mic seat: a compact pair beside the composer's tool
+   buttons, a transient status bubble, and the settings popover. Sizes and
+   palette mirror InputBar's .add control so the seats read as one row. */
+
+.wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: none;
+}
+
+/* Mic circle — the 28px attach-circle geometry from the composer bar. */
+.mic,
+.micRecording {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 999px;
+  background: var(--dsw-specific-selector);
+  color: var(--dsw-alias-label-primary);
+  cursor: pointer;
+}
+
+.mic:hover:not(:disabled) {
+  background: var(--dsw-alias-interactive-bg-hover-solid);
+}
+
+.mic:disabled,
+.micRecording:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* Recording: red fill plus a breathing ring while the take runs. */
+.micRecording {
+  background: #d64541;
+  color: #fff;
+  animation: voice-pulse 1.6s ease-out infinite;
+}
+
+@keyframes voice-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(214, 69, 65, 0.45); }
+  70% { box-shadow: 0 0 0 7px rgba(214, 69, 65, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(214, 69, 65, 0); }
+}
+
+.spin {
+  animation: voice-rotate 0.9s linear infinite;
+}
+
+@keyframes voice-rotate {
+  to { transform: rotate(360deg); }
+}
+
+/* Settings chevron: quiet until hovered or open. */
+.chevron,
+.chevronOpen {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 14px;
+  height: 28px;
+  margin-left: -2px;
+  border: none;
+  padding: 0;
+  background: transparent;
+  color: var(--dsw-alias-label-secondary);
+  opacity: 0.55;
+  cursor: pointer;
+}
+
+.chevron:hover:not(:disabled),
+.chevronOpen {
+  opacity: 1;
+}
+
+.chevron:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+/* Status bubble above the seat: the mic's only announcement surface. */
+.bubble {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 0;
+  max-width: 280px;
+  padding: 5px 10px;
+  border-radius: 8px;
+  background: var(--dsw-alias-tooltip-bg, rgba(31, 31, 31, 0.94));
+  color: var(--dsw-alias-label-primary, #fff);
+  font-size: 12px;
+  line-height: 18px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  pointer-events: none;
+  z-index: 40;
+}
+
+/* Settings popover, anchored above the seat like the bubble. */
+.panel {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 0;
+  display: grid;
+  gap: 10px;
+  width: 252px;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(127, 127, 127, 0.28);
+  background: var(--dsw-alias-tooltip-bg, rgba(31, 31, 31, 0.97));
+  color: var(--dsw-alias-label-primary, #fff);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+  z-index: 40;
+}
+
+.panelTitle {
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 600;
+}
+
+.row {
+  display: grid;
+  gap: 4px;
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--dsw-alias-label-secondary, #9a9a9f);
+}
+
+.row select {
+  height: 28px;
+  padding: 0 6px;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  background: var(--dsw-specific-selector, rgba(127, 127, 127, 0.18));
+  color: var(--dsw-alias-label-primary, #fff);
+  font-size: 12px;
+  cursor: pointer;
+  appearance: none;
+}
+
+.row select:hover:not(:disabled) {
+  background: var(--dsw-alias-interactive-bg-hover-solid, rgba(127, 127, 127, 0.28));
+}
+
+.row select:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.rowCheck {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--dsw-alias-label-primary, #fff);
+  cursor: pointer;
+}
+
+.rowCheck input {
+  accent-color: var(--dsw-alias-brand-primary, #3964fe);
+  cursor: pointer;
+}

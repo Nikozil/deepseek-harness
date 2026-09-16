@@ -347,6 +347,11 @@
     - id: ui-plan
       name: '@deepseek-ai/dsh-client-ui-plan'
 
+    # Voice dictation: the composer mic seat transcribing locally in the
+    # browser through a WASM Whisper pipeline (audio never reaches the Host).
+    - id: ui-voice-input
+      name: '@deepseek-ai/dsh-client-ui-voice-input'
+
     - id: ui-user-questions
       name: '@deepseek-ai/dsh-client-ui-user-questions'
 
